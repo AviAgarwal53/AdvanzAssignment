@@ -66,6 +66,7 @@ class ShopCart:
             if(current_Product.unique_id == unique_id):
                 print(current_Product.unique_id,current_Product.price,current_Product.product_name,current_Product.date_of_manufacturing,current_Product.best_before,current_Product.product_quantity)
             current_Product = current_Product.next_Product
+        print("Item Doesn't Exist")
     
 
 # Example usage:
