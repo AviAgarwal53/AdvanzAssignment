@@ -70,7 +70,8 @@ class Complaint:
         while current_ComplaintTracker:
             if(current_ComplaintTracker.unique_complaint_id == unique_complaint_id):
                 print(current_ComplaintTracker.unique_complaint_id,current_ComplaintTracker.customer_name,current_ComplaintTracker.service_number,current_ComplaintTracker.complaint_desc,current_ComplaintTracker.complaint_date)
-                break
+
+                return
             current_ComplaintTracker = current_ComplaintTracker.next_ComplaintTracker
 
         #IF the complaint is resolved or Doesn't Exist
