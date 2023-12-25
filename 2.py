@@ -14,6 +14,7 @@ class Complaint:
         self.head = None
         self.unique_complaint_id = 0
         self.count = 0 
+        self.Closed_complaints = []
 
     #Function to add complaits in the List
     def addComplaintTracker(self, customer_name,service_number,complaint_desc,complaint_date):
@@ -40,6 +41,7 @@ class Complaint:
             self.head = current_ComplaintTracker.next_ComplaintTracker
             self.count-=1
             current_ComplaintTracker = None
+            self.Closed_complaints.append(unique_complaint_id)
             return
 
         prev_ComplaintTracker = None
@@ -68,9 +70,14 @@ class Complaint:
         while current_ComplaintTracker:
             if(current_ComplaintTracker.unique_complaint_id == unique_complaint_id):
                 print(current_ComplaintTracker.unique_complaint_id,current_ComplaintTracker.customer_name,current_ComplaintTracker.service_number,current_ComplaintTracker.complaint_desc,current_ComplaintTracker.complaint_date)
-
+                break
             current_ComplaintTracker = current_ComplaintTracker.next_ComplaintTracker
-    
+
+        #IF the complaint is resolved or Doesn't Exist
+        if unique_complaint_id in self.Closed_complaints:
+            print("The Complaint You have been closed")
+        else:
+            print("The unique you have mentioned doesn't exist")
 
 # Example usage:
 complainttracker = Complaint()
@@ -81,16 +88,29 @@ DisplayAll(DA),
 Display using complaint id(DCI),
 close a complaint(CC),
 (use 'stop' keyword to stop the program)''')
+
+from datetime import datetime
+
+# Get today's date
+
+
+    
+
+
 while True:
     function = input()
     if function.lower() == "stop":
         break
     if function.lower() == "ac":
-        customer_name = input("Enter the Customer name : ")
-        service_number = int(input("Enter the Service Number: "))
-        complaint_desc = input("Enter the Complaint description : ")
-        complaint_date = input("Enter the Complaint Date : ")
-        complainttracker.addComplaintTracker(customer_name,service_number,complaint_desc,complaint_date)
+        try:
+            customer_name = input("Enter the Customer name : ")
+            service_number = int(input("Enter the Service Number: "))
+            complaint_desc = input("Enter the Complaint description : ")
+            today = datetime.today()
+            complaint_date = today
+            complainttracker.addComplaintTracker(customer_name,service_number,complaint_desc,complaint_date)
+        except Exception as e:
+            print(e)
 
     elif function.lower() == "da":
         complainttracker.displayAll()
