@@ -49,7 +49,6 @@ class ShopCart:
         prev_Product.next_Product = current_Product.next_Product
         current_Product = None
 
-    #function to Sell the item
     
     
     # function is to Display the products in the List
@@ -73,6 +72,17 @@ class ShopCart:
 shop_cart = ShopCart()
 
 #add in the format product_name,price,date_of_manufacturing,best_before)
+from datetime import datetime
+def validDate(user_input_date):
+    user_date = datetime.strptime(user_input_date, "%Y-%m-%d")
+    today = datetime.today()
+    diff = today-user_date
+    if int(diff.days)>=0:
+        pass
+    else:
+        raise ValueError("Please Enter valid Date")
+
+
 
 print('''Enter the function you want to perform: 
 Choose between addProduct(AP),
@@ -86,22 +96,33 @@ while True:
     if function.lower() == "stop":
         break
     if function.lower() == "ap":
-        product_name = input("Enter the Product name : ")
-        price = int(input("Enter the Product price : "))
-        date_of_manufacturing = input("Enter the date of manufacturing : ")
-        best_before = input("Enter the best before : ")
-        product_quantity =int(input("Enter the product quantity : "))
-        shop_cart.addProduct(product_name,price,date_of_manufacturing,best_before,product_quantity)
+        try:
+            product_name = input("Enter the Product name : ")
+            price = int(input("Enter the Product price : "))
+            date_of_manufacturing = input("Enter the date of manufacturing : (YYYY/MM/DD)")
+            validDate(date_of_manufacturing)
+            best_before = input("Enter the best before : ")
+            product_quantity =int(input("Enter the product quantity : "))
+            shop_cart.addProduct(product_name,price,date_of_manufacturing,best_before,product_quantity)
+        except Exception as e:
+            print(e)
 
     elif function.lower() == "da":
         shop_cart.displayAll()
 
     elif function.lower() == "dui":
-        unique_id = int(input("Enter the Unique id of the product : "))
-        shop_cart.display(unique_id)
+        try:
+            unique_id = int(input("Enter the Unique id of the product : "))
+            shop_cart.display(unique_id)
+        except Exception as e:
+            print(e)
     elif function.lower() == "rdp":
-        unique_id = int(input("Enter the Unique id of the product : "))
-        shop_cart.removeDefective(unique_id)
-
+        try:
+            unique_id = int(input("Enter the Unique id of the product : "))
+            shop_cart.removeDefective(unique_id)
+        except Exception as e:
+            print(e)
+    else:
+        print("Invalid Input")
     
 
