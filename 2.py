@@ -75,7 +75,7 @@ class Complaint:
 
         #IF the complaint is resolved or Doesn't Exist
         if unique_complaint_id in self.Closed_complaints:
-            print("The Complaint You have been closed")
+            print("The Complaint Number You have entered is closed")
         else:
             print("The unique you have mentioned doesn't exist")
 
