@@ -278,7 +278,14 @@
 
 
 <script>
-    function getRandomHexColor() {
+    function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    async function getRandomHexColor() {
+        for (let index = 0; index < 10; index++) {
+
+
+
         // Generate a random hexadecimal value (e.g., #RRGGBB)
         const randomColor11 = Math.floor(Math.random()*16777215).toString(16);
         const randomColor1 ='#' + '0'.repeat(6 - randomColor11.length)+ randomColor11;
@@ -350,6 +357,8 @@
         document.getElementById("textColor2").value = randomColor6;
         document.getElementById("textColor3").value = randomColor7;
         document.getElementById("textColor4").value = randomColor8;
+        await delay(300);
+        }
     }
 
 
@@ -372,6 +381,11 @@
         document.getElementById('strip3').style.backgroundColor = paletteColor3;
         document.getElementById('strip4').style.backgroundColor = paletteColor4;
     }
+
+
+
+
+
     // generates the image
     function generateImage(){
       // getting the value of the hexcode of the image
@@ -409,6 +423,13 @@
         hex4.style.color = texthexCode4;
         
     }
+
+
+
+
+
+
+
     // function to convert the div tag into image 
     function convertToImage() {
         const generatedDiv = document.getElementById('generatedDiv');
