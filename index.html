@@ -236,6 +236,7 @@
     <!-- image generate buttons -->
     <div class="paletteColor">
         <button class="button" onclick="generateImage();">Show Image</button>
+        <button onclick="getRandomHexColor()">Auto Generate Color</button>
     </div>
 
 
@@ -270,124 +271,173 @@
         </div>
         <div class="grid-item imageContainer div4" id="imageContainer4"><h5 id="image4Hexcode"></h5></div>
     </div>
-
-
-  </body>
+</body>
 
     
 
 
 
-    <script>
+<script>
+    function getRandomHexColor() {
+        // Generate a random hexadecimal value (e.g., #RRGGBB)
+        const randomColor11 = Math.floor(Math.random()*16777215).toString(16);
+        const randomColor1 ='#' + '0'.repeat(6 - randomColor11.length)+ randomColor11;
+        const randomColor21 = Math.floor(Math.random()*16777215).toString(16);
+        const randomColor2 ='#' + '0'.repeat(6 - randomColor21.length)+ randomColor21;
+        const randomColor31 = Math.floor(Math.random()*16777215).toString(16);
+        const randomColor3 ='#' + '0'.repeat(6 - randomColor31.length)+ randomColor31;
+        const randomColor41 = Math.floor(Math.random()*16777215).toString(16);
+        const randomColor4 ='#' + '0'.repeat(6 - randomColor41.length)+ randomColor41;
+        const randomColor51 = Math.floor(Math.random()*16777215).toString(16);
+        const randomColor5 ='#' + '0'.repeat(6 - randomColor51.length)+ randomColor51;
+        const randomColor61 = Math.floor(Math.random()*16777215).toString(16);
+        const randomColor6 ='#' + '0'.repeat(6 - randomColor61.length)+ randomColor61;
+        const randomColor71 = Math.floor(Math.random()*16777215).toString(16);
+        const randomColor7 ='#' + '0'.repeat(6 - randomColor71.length)+ randomColor71;
+        const randomColor81 = Math.floor(Math.random()*16777215).toString(16);
+        const randomColor8 ='#' + '0'.repeat(6 - randomColor81.length)+ randomColor81;
+        
+        
+        // changing the flag color
+        
+        document.getElementById('strip1').style.backgroundColor = randomColor1;
+        document.getElementById('strip2').style.backgroundColor = randomColor2;
+        document.getElementById('strip3').style.backgroundColor = randomColor3;
+        document.getElementById('strip4').style.backgroundColor = randomColor4;
+
+        
+        //generating  image
+        imageContainer1.style.backgroundColor = randomColor1;
+        imageContainer2.style.backgroundColor = randomColor2;
+        imageContainer3.style.backgroundColor = randomColor3;
+        imageContainer4.style.backgroundColor = randomColor4;
+        
+        
 
 
-        // generates the flag which has 4 colors
-        function color(){
-            const paletteColor1 = document.getElementById('paletteColor1').value;
-            const paletteColor2 = document.getElementById('paletteColor2').value;
-            const paletteColor3 = document.getElementById('paletteColor3').value;
-            const paletteColor4 = document.getElementById('paletteColor4').value;
+
+        // Text of the first image
+        const hex1 = document.getElementById("image1Hexcode");
+        hex1.innerHTML = randomColor1;
+        hex1.style.color = randomColor5;
+
+        // Text of the second image
+        const hex2 = document.getElementById("image2Hexcode");
+        hex2.innerHTML = randomColor2;
+        hex2.style.color = randomColor6;
+        
+        // Text of the third image
+        const hex3 = document.getElementById("image3Hexcode");
+        hex3.innerHTML = randomColor3;
+        hex3.style.color = randomColor7;
+        
+        
+        // Text of the fourth image
+        const hex4 = document.getElementById("image4Hexcode");
+        hex4.innerHTML = randomColor4;
+        hex4.style.color = randomColor8;
+
+
+
+
+        // Changing the color of the palette
+
+        document.getElementById("paletteColor1").value = randomColor1;
+        document.getElementById("paletteColor2").value = randomColor2;
+        document.getElementById("paletteColor3").value = randomColor3;
+        document.getElementById("paletteColor4").value = randomColor4;
+        document.getElementById("textColor1").value = randomColor5;
+        document.getElementById("textColor2").value = randomColor6;
+        document.getElementById("textColor3").value = randomColor7;
+        document.getElementById("textColor4").value = randomColor8;
+    }
+
+
+
+
+
+
+
+
+
+    // generates the flag which has 4 colors
+    function color(){
+        const paletteColor1 = document.getElementById('paletteColor1').value;
+        const paletteColor2 = document.getElementById('paletteColor2').value;
+        const paletteColor3 = document.getElementById('paletteColor3').value;
+        const paletteColor4 = document.getElementById('paletteColor4').value;
+        
+        document.getElementById('strip1').style.backgroundColor = paletteColor1;
+        document.getElementById('strip2').style.backgroundColor = paletteColor2;
+        document.getElementById('strip3').style.backgroundColor = paletteColor3;
+        document.getElementById('strip4').style.backgroundColor = paletteColor4;
+    }
+    // generates the image
+    function generateImage(){
+      // getting the value of the hexcode of the image
+        var hexCode1 = document.getElementById('paletteColor1').value;
+        var hexCode2 = document.getElementById('paletteColor2').value;
+        var hexCode3 = document.getElementById('paletteColor3').value;
+        var hexCode4 = document.getElementById('paletteColor4').value;
+      // getting the values of the hexcode of the text 
+        var texthexCode1 = document.getElementById('textColor1').value;
+        var texthexCode2 = document.getElementById('textColor2').value;
+        var texthexCode3 = document.getElementById('textColor3').value;
+        var texthexCode4 = document.getElementById('textColor4').value;
+      // accessing the div tags
+        var imageContainer1 = document.getElementById('imageContainer1');
+        var imageContainer2 = document.getElementById('imageContainer2');
+        var imageContainer3 = document.getElementById('imageContainer3');
+        var imageContainer4 = document.getElementById('imageContainer4');
+        // changing the backgroundColor of each div tag to generateImage
+        imageContainer1.style.backgroundColor = hexCode1;
+        imageContainer2.style.backgroundColor = hexCode2;
+        imageContainer3.style.backgroundColor = hexCode3;
+        imageContainer4.style.backgroundColor = hexCode4;
+        // changing the color of the text accordingly to also writing the data into each text
+        const hex1 = document.getElementById("image1Hexcode");
+        hex1.innerHTML = hexCode1;
+        hex1.style.color = texthexCode1;
+        const hex2 = document.getElementById("image2Hexcode");
+        hex2.innerHTML = hexCode2;
+        hex2.style.color = texthexCode2;
+        const hex3 = document.getElementById("image3Hexcode");
+        hex3.innerHTML = hexCode3;
+        hex3.style.color = texthexCode3;
+        const hex4 = document.getElementById("image4Hexcode");
+        hex4.innerHTML = hexCode4;
+        hex4.style.color = texthexCode4;
+        
+    }
+    // function to convert the div tag into image 
+    function convertToImage() {
+        const generatedDiv = document.getElementById('generatedDiv');
+        
+        html2canvas(generatedDiv).then(function(canvas) {
+            const dataUrl = canvas.toDataURL('image/png');
             
-            document.getElementById('strip1').style.backgroundColor = paletteColor1;
-            document.getElementById('strip2').style.backgroundColor = paletteColor2;
-            document.getElementById('strip3').style.backgroundColor = paletteColor3;
-            document.getElementById('strip4').style.backgroundColor = paletteColor4;
-        }
-
-
-
-
-        // generates the image
-        function generateImage(){
-
-          // getting the value of the hexcode of the image
-            var hexCode1 = document.getElementById('paletteColor1').value;
-            var hexCode2 = document.getElementById('paletteColor2').value;
-            var hexCode3 = document.getElementById('paletteColor3').value;
-            var hexCode4 = document.getElementById('paletteColor4').value;
-
-
-
-
-          // getting the values of the hexcode of the text 
-            var texthexCode1 = document.getElementById('textColor1').value;
-            var texthexCode2 = document.getElementById('textColor2').value;
-            var texthexCode3 = document.getElementById('textColor3').value;
-            var texthexCode4 = document.getElementById('textColor4').value;
-
-
-          // accessing the div tags
-            var imageContainer1 = document.getElementById('imageContainer1');
-            var imageContainer2 = document.getElementById('imageContainer2');
-            var imageContainer3 = document.getElementById('imageContainer3');
-            var imageContainer4 = document.getElementById('imageContainer4');
-
-
-
-            // changing the backgroundColor of each div tag to generateImage
-            imageContainer1.style.backgroundColor = hexCode1;
-            imageContainer2.style.backgroundColor = hexCode2;
-            imageContainer3.style.backgroundColor = hexCode3;
-            imageContainer4.style.backgroundColor = hexCode4;
-
-
-
-            // changing the color of the text accordingly to also writing the data into each text
-            const hex1 = document.getElementById("image1Hexcode");
-            hex1.innerHTML = hexCode1;
-            hex1.style.color = texthexCode1;
-
-            const hex2 = document.getElementById("image2Hexcode");
-            hex2.innerHTML = hexCode2;
-            hex2.style.color = texthexCode2;
-
-            const hex3 = document.getElementById("image3Hexcode");
-            hex3.innerHTML = hexCode3;
-            hex3.style.color = texthexCode3;
-
-            const hex4 = document.getElementById("image4Hexcode");
-            hex4.innerHTML = hexCode4;
-            hex4.style.color = texthexCode4;
-
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = 'generated_image.png';
             
+            link.click();
+        });
+    }
+    color(); // Initialize colors
+    function toggleConversion() {
+        console.log("i")
+        const checkbox = document.getElementById('disableConversion');
+        const divCl = document.getElementById('generatedDiv');
+        const labelin = document.getElementById("disableConversions")
+        if (checkbox.checked) {
+          divCl.onclick = ""; // Disable the onclick event
+          labelin.innerHTML = "Enable click"
+        } 
+        else {
+          divCl.onclick = convertToImage; // Enable the onclick event
+          labelin.innerHTML = "Disable click"
         }
-
-
-
-        // function to convert the div tag into image 
-        function convertToImage() {
-            const generatedDiv = document.getElementById('generatedDiv');
-            
-            html2canvas(generatedDiv).then(function(canvas) {
-                const dataUrl = canvas.toDataURL('image/png');
-                
-                const link = document.createElement('a');
-                link.href = dataUrl;
-                link.download = 'generated_image.png';
-                
-                link.click();
-            });
-        }
-
-        color(); // Initialize colors
-
-
-
-        function toggleConversion() {
-            console.log("i")
-            const checkbox = document.getElementById('disableConversion');
-            const divCl = document.getElementById('generatedDiv');
-            const labelin = document.getElementById("disableConversions")
-            if (checkbox.checked) {
-              divCl.onclick = ""; // Disable the onclick event
-              labelin.innerHTML = "Enable click"
-
-            } 
-            else {
-              divCl.onclick = convertToImage; // Enable the onclick event
-              labelin.innerHTML = "Disable click"
-            }
-          }
-    </script>
+      }
+</script>
 
 </html>
