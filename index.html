@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palette Hunt</title>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://kit.fontawesome.com/d1bd6fdd3f.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    /* Div container for image 1 */
+    div#imageContainer1 {
+        top: 50px;
+        left: 310px;
+    }
+
+    /* Div container for image 2 */
+
+    div#imageContainer2 {
+        top: 5.5pc;
+        right: 13pc;
+    }
+
+    /* Div container for image 3 */
+    div#imageContainer3 {
+        left: 25pc;
+        bottom: 4.5pc;
+    }
+
+    /* Div container for image 4 */
+    div#imageContainer4 {
+        bottom: 2.5pc;
+        right: 7pc;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-gap: 10px;
+    }
+
+    .grid-item {
+        padding: 20px;
+        text-align: center;
+        width: 350px;
+        position: relative;
+    }
+
+    body {
+        background-color: #a6b1e1;
+        font-family: Arial, sans-serif;
+        margin: 50px 20px 50px 50px;
+        text-align: right;
+    }
+    /* Aligning the Palette Hunt text to the center */
+    #h1 {
+        text-align: center;
+        font-size: 3em;
+    }
+
+    .paletteLabel {
+        text-align: left;
+        margin-right: 84px;
+    }
+
+    input[type="color"] {
+        align-items: end;
+        padding: inherit;
+    }
+
+    .paletteColor {
+        background-color: #a6b1e1;
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+    }
+
+    .textDiv2 {
+        position: absolute;
+        top: 13pc;
+        right: 38pc;
+        margin: 10px;
+    }
+
+    .colorBox {
+        margin-left: 5px;
+    }
+
+    .colorStrip {
+        width: 290px;
+        height: 42px;
+    }
+
+
+    /* div tag which contains the images */
+    .imageGen {
+        background-image: linear-gradient(#fcd0df, #c2ebed);
+        width: 70pc;
+        height: 375px;
+    }
+
+    .lb1{
+        margin-right: 105px;
+    }
+
+    h5{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        margin: 10px;
+    }
+
+    #colorStrips{
+        position: relative;
+        bottom: 7pc;
+        width: 18pc;
+    }
+
+    .textDiv1 {
+        margin-top: -6pc;
+        margin-left: 36pc;
+        position: relative;
+        margin-right: 5px;
+        
+    }
+
+
+    /* Customize the label (the container) */
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    #disableConversions{
+        display: flex;
+    }
+</style>
+<body>
+
+
+
+    <!-- palette hunt heading -->
+    <h1 id="h1">Palette Hunt</h1>
+
+
+
+
+
+
+
+    <!-- Flag color palette -->
+    <label class="lb paletteLabel" for="paletteColor">Select Palette Color:</label>
+    <div class="paletteColor">
+        <div class="colorBox"><input type="color" id="paletteColor1" value="#ff0000" onchange="color()"></div>
+        <div class="colorBox"><input type="color" id="paletteColor2" value="#ff0000" onchange="color()"></div>
+        <div class="colorBox"><input type="color" id="paletteColor3" value="#ff0000" onchange="color()"></div>
+        <div class="colorBox"><input type="color" id="paletteColor4" value="#ff0000" onchange="color()"></div>
+    </div>
+
+
+
+
+
+    <!-- Text color palette -->
+    <label class="lb1 paletteLabel" for="textColor">Select Text Color:</label>
+    <div class="paletteColor">
+        <div class="colorBox"><input type="color" id="textColor1" value="#000000"></div>
+        <div class="colorBox"><input type="color" id="textColor2" value="#000000"></div>
+        <div class="colorBox"><input type="color" id="textColor3" value="#000000"></div>
+        <div class="colorBox"><input type="color" id="textColor4" value="#000000"></div>
+    </div>
+
+
+    <!-- image generate buttons -->
+    <div class="paletteColor">
+        <button class="button" onclick="generateImage();">Show Image</button>
+    </div>
+
+
+
+    <!-- For creating flag of four different colors -->
+    <div id="colorStrips">
+        <div class="colorStrip" id="strip1"></div>
+        <div class="colorStrip" id="strip2"></div>
+        <div class="colorStrip" id="strip3"></div>
+        <div class="colorStrip" id="strip4"></div>
+    </div>
+
+
+    <label class="container" for="disableConversion" ><div id = "disableConversions">Disable click</div>
+      <input type="checkbox"  id="disableConversion" onclick="toggleConversion()">
+      <span class="checkmark"></span>
+    </label>
+    <!-- <input type="checkbox" id="disableConversion" onclick="toggleConversion()">
+    <label for="disableConversion" id = "disableConversions">Disable click</label> -->
+
+    <!-- the image is created in this div tag -->
+    <div class="grid-container imageGen" id="generatedDiv" onclick="convertToImage()">
+        <div class="grid-item imageContainer div1" id="imageContainer1"><h5 id="image1Hexcode"></h5></div>
+        <div class="grid-item imageContainer div2" id="imageContainer2">
+            <h5 id="image2Hexcode"></h5>
+            <h3 class="textDiv1" title="follow me on instagram"><a href="https://www.instagram.com/im.avieee" target="_blank" style="color: black;">
+              <i class="fa-brands fa-instagram" >AviAgarwal</i>
+              </a></h3>
+        </div>
+        <div class="grid-item imageContainer div3" id="imageContainer3"><h5 id="image3Hexcode"></h5>
+            <h3 class="textDiv2"><i class="fa-brands fa-x-twitter">aviagarwal</i></h3>
+        </div>
+        <div class="grid-item imageContainer div4" id="imageContainer4"><h5 id="image4Hexcode"></h5></div>
+    </div>
+
+
+  </body>
+
+    
+
+
+
+    <script>
+
+
+        // generates the flag which has 4 colors
+        function color(){
+            const paletteColor1 = document.getElementById('paletteColor1').value;
+            const paletteColor2 = document.getElementById('paletteColor2').value;
+            const paletteColor3 = document.getElementById('paletteColor3').value;
+            const paletteColor4 = document.getElementById('paletteColor4').value;
+            
+            document.getElementById('strip1').style.backgroundColor = paletteColor1;
+            document.getElementById('strip2').style.backgroundColor = paletteColor2;
+            document.getElementById('strip3').style.backgroundColor = paletteColor3;
+            document.getElementById('strip4').style.backgroundColor = paletteColor4;
+        }
+
+
+
+
+        // generates the image
+        function generateImage(){
+
+          // getting the value of the hexcode of the image
+            var hexCode1 = document.getElementById('paletteColor1').value;
+            var hexCode2 = document.getElementById('paletteColor2').value;
+            var hexCode3 = document.getElementById('paletteColor3').value;
+            var hexCode4 = document.getElementById('paletteColor4').value;
+
+
+
+
+          // getting the values of the hexcode of the text 
+            var texthexCode1 = document.getElementById('textColor1').value;
+            var texthexCode2 = document.getElementById('textColor2').value;
+            var texthexCode3 = document.getElementById('textColor3').value;
+            var texthexCode4 = document.getElementById('textColor4').value;
+
+
+          // accessing the div tags
+            var imageContainer1 = document.getElementById('imageContainer1');
+            var imageContainer2 = document.getElementById('imageContainer2');
+            var imageContainer3 = document.getElementById('imageContainer3');
+            var imageContainer4 = document.getElementById('imageContainer4');
+
+
+
+            // changing the backgroundColor of each div tag to generateImage
+            imageContainer1.style.backgroundColor = hexCode1;
+            imageContainer2.style.backgroundColor = hexCode2;
+            imageContainer3.style.backgroundColor = hexCode3;
+            imageContainer4.style.backgroundColor = hexCode4;
+
+
+
+            // changing the color of the text accordingly to also writing the data into each text
+            const hex1 = document.getElementById("image1Hexcode");
+            hex1.innerHTML = hexCode1;
+            hex1.style.color = texthexCode1;
+
+            const hex2 = document.getElementById("image2Hexcode");
+            hex2.innerHTML = hexCode2;
+            hex2.style.color = texthexCode2;
+
+            const hex3 = document.getElementById("image3Hexcode");
+            hex3.innerHTML = hexCode3;
+            hex3.style.color = texthexCode3;
+
+            const hex4 = document.getElementById("image4Hexcode");
+            hex4.innerHTML = hexCode4;
+            hex4.style.color = texthexCode4;
+
+            
+        }
+
+
+
+        // function to convert the div tag into image 
+        function convertToImage() {
+            const generatedDiv = document.getElementById('generatedDiv');
+            
+            html2canvas(generatedDiv).then(function(canvas) {
+                const dataUrl = canvas.toDataURL('image/png');
+                
+                const link = document.createElement('a');
+                link.href = dataUrl;
+                link.download = 'generated_image.png';
+                
+                link.click();
+            });
+        }
+
+        color(); // Initialize colors
+
+
+
+        function toggleConversion() {
+            console.log("i")
+            const checkbox = document.getElementById('disableConversion');
+            const divCl = document.getElementById('generatedDiv');
+            const labelin = document.getElementById("disableConversions")
+            if (checkbox.checked) {
+              divCl.onclick = ""; // Disable the onclick event
+              labelin.innerHTML = "Enable click"
+
+            } 
+            else {
+              divCl.onclick = convertToImage; // Enable the onclick event
+              labelin.innerHTML = "Disable click"
+            }
+          }
+    </script>
+
+</html>
